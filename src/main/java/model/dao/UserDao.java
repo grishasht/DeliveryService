@@ -2,5 +2,5 @@ package model.dao;
 
 import model.entity.User;
 
-public interface UserDao extends Dao<User, Integer> {
+public interface UserDao extends Dao<User> {
 }

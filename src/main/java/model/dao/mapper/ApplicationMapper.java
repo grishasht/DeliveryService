@@ -1,4 +1,12 @@
 package model.dao.mapper;
 
-public class ApplicationMapper {
+import model.entity.Application;
+
+import java.sql.ResultSet;
+
+public class ApplicationMapper implements Mapper<Application> {
+    @Override
+    public Application getEntityFromResSet(ResultSet resultSet, int... index) {
+        return null;
+    }
 }

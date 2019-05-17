@@ -1,4 +1,12 @@
 package model.dao.mapper;
 
-public class AddressMapper {
+import model.entity.Address;
+
+import java.sql.ResultSet;
+
+public class AddressMapper implements Mapper<Address> {
+    @Override
+    public Address getEntityFromResSet(ResultSet resultSet, int... index) {
+        return null;
+    }
 }
