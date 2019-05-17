@@ -1,4 +1,4 @@
 package model.dao;
 
-public class DaoFactory {
+public abstract class DaoFactory {
 }

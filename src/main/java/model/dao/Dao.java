@@ -2,14 +2,18 @@ package model.dao;
 
 import java.util.List;
 
-public interface Dao <E, T> {
+public interface Dao <E> extends AutoCloseable{
 
     void create(E entity);
 
-    List<E> read();
+    List<E> read(Integer id);
 
     List<E> readAll();
 
-    void delete(T key);
+    void update(E entity);
 
+    void delete(String key);
+
+    @Override
+    void close() throws Exception;
 }
