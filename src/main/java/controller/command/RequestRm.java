@@ -1,4 +1,11 @@
 package controller.command;
 
-public class RequestRm {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class RequestRm implements Command{
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
 }
