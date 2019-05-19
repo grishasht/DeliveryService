@@ -28,6 +28,11 @@ public class LuggageJDBC implements LuggageDao {
             log.error(properties.getProperty("FILE_NOT_FOUND") + "in LuggageJDBC");
         }
     }
+
+    public LuggageJDBC(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void create(Luggage entity) {
         String query = "INSERT INTO luggage(type, weight, price)"  +
@@ -74,8 +79,10 @@ public class LuggageJDBC implements LuggageDao {
             log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in LuggageJDBC");
         } finally {
             try {
-                resultSet.close();
-                log.debug(properties.getProperty("RES_SET_CLOSE") + "in LuggageJDBC");
+                if (resultSet != null) {
+                    resultSet.close();
+                    log.debug(properties.getProperty("RES_SET_CLOSE") + "in LuggageJDBC");
+                }
                 try {
                     if (preparedStatement != null) {
                         preparedStatement.close();

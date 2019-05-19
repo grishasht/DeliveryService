@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.entity.Application;
+import model.entity.Request;
 
-public interface ApplicationDao extends Dao<Application> {
+public interface ApplicationDao extends Dao<Request> {
 }

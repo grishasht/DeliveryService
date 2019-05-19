@@ -5,7 +5,7 @@ import model.entity.Request;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ApplicationMapper implements Mapper<Request> {
+public class RequestMapper implements Mapper<Request> {
     @Override
     public Request getEntityFromResSet(ResultSet resultSet, int... index) {
         Request application = new Request();
