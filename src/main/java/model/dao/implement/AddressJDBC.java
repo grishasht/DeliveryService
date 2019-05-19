@@ -77,9 +77,9 @@ public class AddressJDBC implements AddressDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC readingAll");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC readAll");
             resultSet = preparedStatement.executeQuery();
-            log.debug(properties.getProperty("RES_SET_OPEN") + "in AddressJDBC readingAll");
+            log.debug(properties.getProperty("RES_SET_OPEN") + "in AddressJDBC readAll");
 
             while (resultSet.next()) {
                 addresses.add(addressMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5));
@@ -116,7 +116,7 @@ public class AddressJDBC implements AddressDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressesJDBC update");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC update");
             preparedStatement.setString(1, entity.getCountry());
             preparedStatement.setString(2, entity.getCity());
             preparedStatement.setString(3, entity.getStreet());
@@ -124,7 +124,7 @@ public class AddressJDBC implements AddressDao {
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC update");
         } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in AddressesJDBC");
+            log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in AddressJDBC");
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -132,7 +132,7 @@ public class AddressJDBC implements AddressDao {
                     log.error(properties.getProperty("PREP_STAT_CLOSE") + "in AddressJDBC update");
                 }
             } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressesJDBC updating");
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressJDBC updating");
             }
         }
     }
@@ -144,17 +144,17 @@ public class AddressJDBC implements AddressDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressesJDBC deleting");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC deleting");
             preparedStatement.execute();
-            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressesJDBC deleting");
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC deleting");
         } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in AddressesJDBC");
+            log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in AddressJDBC");
         } finally {
             try {
                 if (preparedStatement != null)
                     preparedStatement.close();
             } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressesJDBC deleting");
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressJDBC deleting");
             }
         }
     }

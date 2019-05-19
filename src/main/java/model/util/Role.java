@@ -1,5 +1,7 @@
 package model.util;
 
+import java.util.Arrays;
+
 public enum Role {
     ADMIN("admin"),
     MANAGER("manager"),
@@ -18,5 +20,8 @@ public enum Role {
     @Override
     public String toString() {
         return this.value;
+    }
+    public static Role contains(String value) {
+        return Arrays.stream(Role.values()).filter(a -> a.getValue().equals(value)).findFirst().orElseThrow(IllegalArgumentException::new);
     }
 }
