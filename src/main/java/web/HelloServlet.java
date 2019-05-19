@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 public class HelloServlet extends HttpServlet {
-    //private static final Logger LOGGER = Logger.getLogger();
+    //private static final LogGenerator LOGGER = LogGenerator.getLogger();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().print("Hello from server");

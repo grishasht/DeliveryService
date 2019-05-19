@@ -6,6 +6,7 @@ public class Luggage {
     private Integer id;
     private String type;
     private Float weight;
+    private Float price;
 
     public Integer getId() {
         return id;
@@ -17,6 +18,14 @@ public class Luggage {
 
     public String getType() {
         return type;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public void setType(String type) {
@@ -38,12 +47,13 @@ public class Luggage {
         Luggage luggage = (Luggage) o;
         return Objects.equals(id, luggage.id) &&
                 Objects.equals(type, luggage.type) &&
-                Objects.equals(weight, luggage.weight);
+                Objects.equals(weight, luggage.weight) &&
+                Objects.equals(price, luggage.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, weight);
+        return Objects.hash(id, type, weight, price);
     }
 
     @Override
@@ -52,6 +62,7 @@ public class Luggage {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", weight=" + weight +
+                ", price=" + price +
                 '}';
     }
 }

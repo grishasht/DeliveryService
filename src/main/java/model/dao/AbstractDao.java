@@ -1,4 +1,5 @@
-package model.dao.mapper;
+package model.dao;
 
-public class AbstractFactory {
+public abstract class AbstractDao {
+
 }
