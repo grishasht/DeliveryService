@@ -73,9 +73,9 @@ public class RequestJDBC implements ApplicationDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC reading");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC read");
             resultSet = preparedStatement.executeQuery();
-            log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC reading");
+            log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC read");
 
             while (resultSet.next()) {
                 requests.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6));
