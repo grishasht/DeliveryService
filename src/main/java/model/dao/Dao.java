@@ -10,10 +10,10 @@ public interface Dao <E> extends AutoCloseable{
 
     List<E> readAll();
 
-    void update(E entity);
+    void update(Integer id, E entity);
 
-    void delete(String key);
+    void delete(Integer id);
 
     @Override
-    void close() throws Exception;
+    void close();
 }
