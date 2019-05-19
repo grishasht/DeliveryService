@@ -1,14 +1,14 @@
 package model.dao.mapper;
 
-import model.entity.Application;
+import model.entity.Request;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ApplicationMapper implements Mapper<Application> {
+public class ApplicationMapper implements Mapper<Request> {
     @Override
-    public Application getEntityFromResSet(ResultSet resultSet, int... index) {
-        Application application = new Application();
+    public Request getEntityFromResSet(ResultSet resultSet, int... index) {
+        Request application = new Request();
 
         try {
             application.setId(resultSet.getInt(index[0]));
