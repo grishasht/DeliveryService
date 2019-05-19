@@ -6,7 +6,6 @@ import model.util.LogGenerator;
 import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,14 +15,14 @@ import java.util.Properties;
 
 public class AccountJDBC implements AccountDao {
     private Logger log = LogGenerator.getInstance();
-    private Properties prop = new Properties();
+    private Properties properties = new Properties();
     private Connection connection;
 
     {
         try {
-            prop.load(new FileInputStream("src/main/resources/log_msg.properties"));
+            properties.load(new FileInputStream("src/main/resources/log_msg.properties"));
         } catch (IOException e) {
-            log.error(prop.getProperty("FILE_NOT_FOUND") + "in AccountJDBC");
+            log.error(properties.getProperty("FILE_NOT_FOUND") + "in AccountJDBC");
         }
     }
 
@@ -37,23 +36,24 @@ public class AccountJDBC implements AccountDao {
         String query = "INSERT INTO accounts(APPLICATION_ID, AMOUNT, DATE, IS_PAID)" +
                 "VALUES (?, ?, ?, ?)";
 
-        try{
+        try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(prop.getProperty("PREP_STAT_OPEN") + "in AccountJDBC create");
-            preparedStatement.setInt(entity.getApplicationId(), 1);
-            preparedStatement.setInt(entity.getAmount(), 2);
-            preparedStatement.setDate(3, entity.getDate());
-            preparedStatement.setBoolean(4, entity.getPaid());
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC create");
+            preparedStatement.setInt(2, entity.getApplicationId());
+            preparedStatement.setInt(3, entity.getAmount());
+            preparedStatement.setDate(4, entity.getDate());
+            preparedStatement.setBoolean(5, entity.getPaid());
             preparedStatement.execute(query);
-            log.debug(prop.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC create");
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC create");
         } catch (SQLException e) {
-            log.error(prop.getProperty("SQL_EXC_WHILE_CREATE") + "in AccountJDBC create");
-        }finally {
+            log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AccountJDBC");
+        } finally {
             try {
-                preparedStatement.close();
-                log.debug(prop.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC create");
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC create");
             } catch (SQLException e) {
-                log.error(prop.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC create");
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC create");
             }
         }
     }
@@ -69,7 +69,7 @@ public class AccountJDBC implements AccountDao {
     }
 
     @Override
-    public void update(Account entity) {
+    public void update(Integer id, Account entity) {
         throw new UnsupportedOperationException();
     }
 
@@ -80,16 +80,17 @@ public class AccountJDBC implements AccountDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(prop.getProperty("PREP_STAT_OPEN") + "in AccountJDBC deleting");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC deleting");
             preparedStatement.execute();
-            log.debug(prop.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC deleting");
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC deleting");
         } catch (SQLException e) {
-            log.error(prop.getProperty("SQL_EXC_WHILE_DELETE") + "in AccountJDBC deleting");
-        }finally {
+            log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in AccountJDBC");
+        } finally {
             try {
-                preparedStatement.close();
+                if (preparedStatement != null)
+                    preparedStatement.close();
             } catch (SQLException e) {
-                log.error(prop.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC deleting");
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC deleting");
             }
         }
     }
@@ -97,10 +98,11 @@ public class AccountJDBC implements AccountDao {
     @Override
     public void close() {
         try {
-            connection.close();
-            log.debug(prop.getProperty("CONN_CLOSE") + "in AccountJDBC");
+            if (connection != null)
+                connection.close();
+            log.debug(properties.getProperty("CONN_CLOSE") + "in AccountJDBC");
         } catch (SQLException e) {
-            log.error(prop.getProperty("SQL_EXC_WHILE_CLOSE_CONN") + "in AccountJDBC");
+            log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_CONN") + "in AccountJDBC");
         }
     }
 }
