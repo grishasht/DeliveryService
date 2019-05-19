@@ -1,6 +1,7 @@
 package model.dao.implement;
 
 import model.dao.AccountDao;
+import model.dao.mapper.AccountMapper;
 import model.entity.Account;
 import model.util.LogGenerator;
 import org.apache.log4j.Logger;
@@ -9,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -65,7 +68,44 @@ public class AccountJDBC implements AccountDao {
 
     @Override
     public List<Account> readAll() {
-        throw new UnsupportedOperationException();
+        List<Account> accounts = new LinkedList<>();
+        String query = "SELECT * FROM addresses";
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        AccountMapper accountMapper = new AccountMapper();
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC readAll");
+            resultSet = preparedStatement.executeQuery();
+            log.debug(properties.getProperty("RES_SET_OPEN") + "in AccountJDBC readAll");
+
+            while (resultSet.next()) {
+                accounts.add(accountMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5));
+            }
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in AccountJDBC");
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                    log.debug(properties.getProperty("RES_SET_CLOSE") + "in AccountJDBC");
+                }
+                try {
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                        log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC readAll");
+                    }
+                } catch (SQLException e) {
+                    log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC readAll");
+                }
+            } catch (SQLException e) {
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_RES_SET") + "in AccountJDBC readAll");
+            }
+        }
+
+
+        return accounts;
     }
 
     @Override
