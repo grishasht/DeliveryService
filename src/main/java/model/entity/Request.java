@@ -1,9 +1,9 @@
 package model.entity;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
-public class Application {
+public class Request {
     private Integer id;
     private Integer userId;
     private Integer luggageId;
@@ -63,7 +63,7 @@ public class Application {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Application that = (Application) o;
+        Request that = (Request) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(userId, that.userId) &&
                 Objects.equals(luggageId, that.luggageId) &&
@@ -79,7 +79,7 @@ public class Application {
 
     @Override
     public String toString() {
-        return "Application{" +
+        return "Request{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", luggageId=" + luggageId +

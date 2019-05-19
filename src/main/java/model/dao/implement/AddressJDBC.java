@@ -25,7 +25,7 @@ public class AddressJDBC implements AddressDao {
         try {
             properties.load(new FileInputStream("src/main/resources/log_msg.properties"));
         } catch (IOException e) {
-            log.error(properties.getProperty("FILE_NOT_FOUND") + "in AccountJDBC");
+            log.error(properties.getProperty("FILE_NOT_FOUND") + "in AddressJDBC");
         }
     }
 
@@ -41,22 +41,22 @@ public class AddressJDBC implements AddressDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC creating");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC creating");
             preparedStatement.setString(1, entity.getCountry());
             preparedStatement.setString(2, entity.getCity());
             preparedStatement.setString(3, entity.getStreet());
             preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
-            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC creating");
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC creating");
         } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AccountJDBC creating");
+            log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AddressJDBC creating");
         } finally {
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();
-                    log.error(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC creating");
+                    log.error(properties.getProperty("PREP_STAT_CLOSE") + "in AddressJDBC creating");
                 } catch (SQLException e) {
-                    log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AccountJDBC creating");
+                    log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AddressJDBC creating");
                 }
             }
         }
@@ -77,29 +77,31 @@ public class AddressJDBC implements AddressDao {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC readingAll");
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC readingAll");
             resultSet = preparedStatement.executeQuery();
-            log.debug(properties.getProperty("RES_SET_OPEN") + "in AccountJDBC readingAll");
+            log.debug(properties.getProperty("RES_SET_OPEN") + "in AddressJDBC readingAll");
 
             while (resultSet.next()) {
                 addresses.add(addressMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5));
             }
         } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in AccountJDBC");
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in AddressJDBC");
         } finally {
             try {
-                resultSet.close();
-                log.debug(properties.getProperty("RES_SET_CLOSE") + "in AccountJDBC");
+                if (resultSet != null) {
+                    resultSet.close();
+                    log.debug(properties.getProperty("RES_SET_CLOSE") + "in AddressJDBC");
+                }
                 try {
                     if (preparedStatement != null) {
                         preparedStatement.close();
-                        log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC readAll");
+                        log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AddressJDBC readAll");
                     }
                 } catch (SQLException e) {
-                    log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AccountJDBC readAll");
+                    log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressJDBC readAll");
                 }
             } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_RES_SET") + "in AccountJDBC readAll");
+                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_RES_SET") + "in AddressJDBC readAll");
             }
         }
 
@@ -120,14 +122,14 @@ public class AddressJDBC implements AddressDao {
             preparedStatement.setString(3, entity.getStreet());
             preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
-            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC update");
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC update");
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in AddressesJDBC");
         } finally {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                    log.error(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC update");
+                    log.error(properties.getProperty("PREP_STAT_CLOSE") + "in AddressJDBC update");
                 }
             } catch (SQLException e) {
                 log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in AddressesJDBC updating");
