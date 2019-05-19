@@ -39,10 +39,10 @@ public class AccountJDBC implements AccountDao {
         try {
             preparedStatement = connection.prepareStatement(query);
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC create");
-            preparedStatement.setInt(2, entity.getApplicationId());
-            preparedStatement.setInt(3, entity.getAmount());
-            preparedStatement.setDate(4, entity.getDate());
-            preparedStatement.setBoolean(5, entity.getPaid());
+            preparedStatement.setInt(1, entity.getApplicationId());
+            preparedStatement.setInt(2, entity.getAmount());
+            preparedStatement.setDate(3, entity.getDate());
+            preparedStatement.setBoolean(4, entity.getPaid());
             preparedStatement.execute(query);
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC create");
         } catch (SQLException e) {

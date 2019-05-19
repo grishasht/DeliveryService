@@ -42,10 +42,10 @@ public class AddressJDBC implements AddressDao {
         try {
             preparedStatement = connection.prepareStatement(query);
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC creating");
-            preparedStatement.setString(2, entity.getCountry());
-            preparedStatement.setString(3, entity.getCity());
-            preparedStatement.setString(4, entity.getStreet());
-            preparedStatement.setInt(5, entity.getHouse());
+            preparedStatement.setString(1, entity.getCountry());
+            preparedStatement.setString(2, entity.getCity());
+            preparedStatement.setString(3, entity.getStreet());
+            preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC creating");
         } catch (SQLException e) {
@@ -115,10 +115,10 @@ public class AddressJDBC implements AddressDao {
         try {
             preparedStatement = connection.prepareStatement(query);
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressesJDBC update");
-            preparedStatement.setString(2, entity.getCountry());
-            preparedStatement.setString(3, entity.getCity());
-            preparedStatement.setString(4, entity.getStreet());
-            preparedStatement.setInt(5, entity.getHouse());
+            preparedStatement.setString(1, entity.getCountry());
+            preparedStatement.setString(2, entity.getCity());
+            preparedStatement.setString(3, entity.getStreet());
+            preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC update");
         } catch (SQLException e) {
