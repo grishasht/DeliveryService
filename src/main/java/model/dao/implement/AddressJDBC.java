@@ -15,10 +15,12 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class AddressJDBC implements AddressDao {
     private Logger log = LogGenerator.getInstance();
     private Properties properties = new Properties();
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("log_msg");
     private Connection connection;
 
     {
