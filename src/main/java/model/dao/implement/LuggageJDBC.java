@@ -35,18 +35,19 @@ public class LuggageJDBC implements LuggageDao {
 
     @Override
     public void create(Luggage entity) {
-        String query = "INSERT INTO luggage(type, weight, price)"  +
+        final String QUERY = "INSERT INTO luggage(type, weight, price)" +
                 "VALUES (?, ?, ?)";
-        PreparedStatement preparedStatement = null;
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC creating");
             preparedStatement.setString(1, entity.getType());
             preparedStatement.setFloat(2, entity.getWeight());
             preparedStatement.setFloat(3, entity.getPrice());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in LuggageJDBC creating");
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC creating");
+
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in LuggageJDBC creating");
         }
@@ -61,39 +62,24 @@ public class LuggageJDBC implements LuggageDao {
     public List<Luggage> readAll() {
         List<Luggage> luggage = new LinkedList<>();
 
-        String query = "SELECT * FROM luggage";
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        final String QUERY = "SELECT * FROM luggage";
         LuggageMapper luggageMapper = new LuggageMapper();
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC readingAll");
-            resultSet = preparedStatement.executeQuery();
-            log.debug(properties.getProperty("RES_SET_OPEN") + "in LuggageJDBC readingAll");
 
-            while (resultSet.next()) {
-                luggage.add(luggageMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4));
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in LuggageJDBC readingAll");
+
+                while (resultSet.next()) {
+                    luggage.add(luggageMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in LuggageJDBC");
             }
-        } catch (SQLException e) {
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC readAll");
+
+        } catch(SQLException e){
             log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in LuggageJDBC");
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                    log.debug(properties.getProperty("RES_SET_CLOSE") + "in LuggageJDBC");
-                }
-                try {
-                    if (preparedStatement != null) {
-                        preparedStatement.close();
-                        log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC readAll");
-                    }
-                } catch (SQLException e) {
-                    log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in LuggageJDBC readAll");
-                }
-            } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_RES_SET") + "in LuggageJDBC readAll");
-            }
         }
 
         return luggage;
@@ -101,52 +87,40 @@ public class LuggageJDBC implements LuggageDao {
 
     @Override
     public void update(Integer id, Luggage entity) {
-        String query = "UPDATE luggage SET type = ?, weight = ?, price = ?" +
+        final String QUERY = "UPDATE luggage SET type = ?, weight = ?, price = ?" +
                 "WHERE id = " + id;
-        PreparedStatement preparedStatement = null;
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC update");
             preparedStatement.setString(1, entity.getType());
             preparedStatement.setFloat(2, entity.getWeight());
             preparedStatement.setFloat(3, entity.getPrice());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in LuggageJDBC update");
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC update");
+
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in LuggageJDBC");
-        } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                    log.error(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC update");
-                }
-            } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in LuggageJDBC updating");
-            }
         }
+
     }
 
     @Override
     public void delete(Integer id) {
-        String query = "DELETE FROM luggage WHERE id = " + id;
-        PreparedStatement preparedStatement = null;
+        final String QUERY = "DELETE FROM luggage WHERE id = " + id;
 
-        try {
-            preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC deleting");
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in LuggageJDBC deleting");
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC delete");
+
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in LuggageJDBC");
-        } finally {
-            try {
-                if (preparedStatement != null)
-                    preparedStatement.close();
-            } catch (SQLException e) {
-                log.error(properties.getProperty("SQL_EXC_WHILE_CLOSE_PREP") + "in LuggageJDBC deleting");
-            }
         }
+
     }
 
     @Override
