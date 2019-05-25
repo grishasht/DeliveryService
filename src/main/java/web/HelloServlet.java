@@ -1,34 +1,20 @@
 package web;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-public class HelloServlet extends HttpServlet {
-    //private static final LogGenerator LOGGER = LogGenerator.getLogger();
-    private String encoding;
-    private String language;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        this.encoding = config.getInitParameter("encoding");
-        this.language = getServletContext().toString();
-    }
+public class HelloServlet extends HttpServlet {
+//    //private static final LogGenerator LOGGER = LogGenerator.getLogger();
+//    private String encoding;
+//    private String language;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-    //    LOGGER.info("resp type: " + resp.getContentType());
-        resp.setContentType("charset= " + encoding);
-        resp.setCharacterEncoding(this.encoding);
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.println("Hello from server " + name);
-        printWriter.println("Кодировка " +  resp.getCharacterEncoding());
-        printWriter.println("Default language" + this.language);
+        req.setAttribute("greeting", "Hello from server!");
+        req.getRequestDispatcher("jsp/Hello.jsp").forward(req, resp);
     }
 
 //    @Override
