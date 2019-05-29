@@ -3,34 +3,17 @@ package model.dao.implement;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
 import model.entity.User;
-import model.util.LogGenerator;
-import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 
-public class UserJDBC implements UserDao {
-    private Logger log = LogGenerator.getInstance();
-    private Properties properties = new Properties();
-    private Connection connection;
-
-    {
-        try {
-            properties.load(new FileInputStream("src/main/resources/log_msg.properties"));
-        } catch (IOException e) {
-            log.error(properties.getProperty("FILE_NOT_FOUND") + "in UserJDBC");
-        }
-    }
-
+public class UserJDBC extends JDBC implements UserDao {
     public UserJDBC(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
 
     @Override
@@ -38,8 +21,9 @@ public class UserJDBC implements UserDao {
         final String QUERY = "INSERT INTO users(login, password, name, email, role) " +
                 " VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC creating");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
+            System.out.println(connection.toString());
+            log.info(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC creating");
 
             preparedStatement.setString(1, entity.getLogin());
             preparedStatement.setString(2, entity.getPassword());
@@ -49,8 +33,9 @@ public class UserJDBC implements UserDao {
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");
-            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC creating");
+            log.info(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC creating");
         } catch (SQLException e) {
+            e.printStackTrace();
             log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in UserJDBC creating");
         }
 
@@ -67,7 +52,7 @@ public class UserJDBC implements UserDao {
         final String QUERY = "SELECT * FROM users";
         UserMapper userMapper = new UserMapper();
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC readAll");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -89,14 +74,14 @@ public class UserJDBC implements UserDao {
 
     @Override
     public void update(Integer id, User entity) {
-    //Realize later
+        //Realize later
     }
 
     @Override
     public void delete(Integer id) {
         final String QUERY = "DELETE FROM users WHERE id = " + id;
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC deleting");
 
             preparedStatement.execute();
@@ -111,7 +96,7 @@ public class UserJDBC implements UserDao {
     }
 
     @Override
-    public void close(){
+    public void close() {
         try {
             connection.close();
             log.debug(properties.getProperty("CONN_CLOSE") + "in UserJDBC");

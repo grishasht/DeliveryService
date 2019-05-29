@@ -3,34 +3,16 @@ package model.dao.implement;
 import model.dao.LuggageDao;
 import model.dao.mapper.LuggageMapper;
 import model.entity.Luggage;
-import model.util.LogGenerator;
-import org.apache.log4j.Logger;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 
-public class LuggageJDBC implements LuggageDao {
-    private Logger log = LogGenerator.getInstance();
-    private Properties properties = new Properties();
-    private Connection connection;
-
-    {
-        try {
-            properties.load(new FileInputStream("src/main/resources/log_msg.properties"));
-        } catch (IOException e) {
-            log.error(properties.getProperty("FILE_NOT_FOUND") + "in LuggageJDBC");
-        }
-    }
-
+public class LuggageJDBC extends JDBC implements LuggageDao {
     public LuggageJDBC(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
 
     @Override
