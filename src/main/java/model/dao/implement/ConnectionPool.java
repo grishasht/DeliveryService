@@ -15,7 +15,7 @@ public class ConnectionPool {
     private static volatile DataSource dataSource;
 
     static {
-        ResourceBundle resBund = ResourceBundle.getBundle("db");
+        ResourceBundle resBund = ResourceBundle.getBundle("data_base");
         DRIVER_CLASS_NAME = resBund.getString("driver.class.name");
         URL = resBund.getString("db.url");
         USERNAME = resBund.getString("db.username");
@@ -25,8 +25,7 @@ public class ConnectionPool {
     private ConnectionPool() {
     }
 
-    static DataSource getDataSource() {
-
+    public static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (ConnectionPool.class) {
                 if (dataSource == null) {
@@ -44,6 +43,7 @@ public class ConnectionPool {
             }
         }
         return dataSource;
+
     }
 
 }
