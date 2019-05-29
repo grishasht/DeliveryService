@@ -16,8 +16,6 @@
     <title>Main page</title>
 </head>
 <body>
-<div>
-    Hello admin
-</div>
+<jsp:include page ="/WEB-INF/admin/header.jsp"/>
 </body>
 </html>
