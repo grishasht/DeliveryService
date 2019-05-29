@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Role {
     ADMIN("admin"),
-    MANAGER("manager"),
+    USER("user"),
     GUEST("guest");
 
     private String value;

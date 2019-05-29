@@ -12,6 +12,19 @@ public class User {
     private String password;
     private Role role;
 
+    public User getGuest(){
+        User user = new User();
+
+        user.setLogin("");
+        user.setPassword("");
+        user.setName("");
+        user.setEmail("");
+        user.setRole(Role.GUEST);
+        user.setId(0);
+
+        return user;
+    }
+
     public Role getRole() {
         return role;
     }
