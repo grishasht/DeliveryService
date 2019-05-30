@@ -45,14 +45,15 @@ public class MainServlet extends HttpServlet {
         String path = request.getPathInfo();
         request.setAttribute(Constants.CUR_REQ_URL, request.getRequestURL());
         Command command = commandMap.get(path);
-        String page = command.execute(request, response);
+        if (command != null) {
+            String page = command.execute(request, response);
 
-        if (page.contains("redirect")) {
-            response.sendRedirect(page.replace("redirect:", ""));
-        } else if (page.contains("forward")) {
-            request.getRequestDispatcher(page.replace("forward:", ""))
-                    .forward(request, response);
+            if (page.contains("redirect")) {
+                response.sendRedirect(page.replace("redirect:", ""));
+            } else if (page.contains("forward")) {
+                request.getRequestDispatcher(page.replace("forward:", ""))
+                        .forward(request, response);
+            }
         }
-
     }
 }
