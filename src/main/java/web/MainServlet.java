@@ -1,4 +1,4 @@
-package controller;
+package web;
 
 import controller.command.*;
 import model.util.Constants;
@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainServlet extends HttpServlet {
-    public static final String USER_LIST = "usersList";
     Map<String, Command> commandMap = new HashMap<>();
 
     @Override

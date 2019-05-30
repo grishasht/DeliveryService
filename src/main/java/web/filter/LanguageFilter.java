@@ -1,4 +1,4 @@
-package controller.filter;
+package web.filter;
 
 import model.util.Constants;
 import javax.servlet.*;
