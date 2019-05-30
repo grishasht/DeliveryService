@@ -1,4 +1,4 @@
-package controller.filter;
+package web.filter;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +10,7 @@ public class EncodingFilter implements Filter {
     private String encoding;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         encoding = filterConfig.getInitParameter("requestEncoding");
         if (encoding == null) encoding = "UTF-8";
     }

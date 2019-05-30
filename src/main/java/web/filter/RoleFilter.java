@@ -1,4 +1,4 @@
-package controller.filter;
+package web.filter;
 
 import model.entity.User;
 import model.util.Constants;
