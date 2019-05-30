@@ -32,7 +32,7 @@ public class UserJDBC extends JDBC implements UserDao {
             preparedStatement.setString(5, entity.getRole().toString());
             preparedStatement.execute();
 
-            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");
+            log.info(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");
             log.info(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC creating");
         } catch (SQLException e) {
             e.printStackTrace();

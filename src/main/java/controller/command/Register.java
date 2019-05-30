@@ -28,6 +28,6 @@ public class Register implements Command {
 
         System.out.println(user.toString());
 
-        return "redirect:/";
+        return "redirect:/WEB-INF/user";
     }
 }

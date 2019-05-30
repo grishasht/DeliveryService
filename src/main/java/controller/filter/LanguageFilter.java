@@ -16,7 +16,7 @@ public class LanguageFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        if (request.getParameter(Constants.CUR_LANG) == null){
+        if (request.getParameter(Constants.CUR_LANG) != null){
             request.getSession().setAttribute(Constants.CUR_LANG, request.getParameter(Constants.CUR_LANG));
         } else {
             request.getSession().setAttribute(Constants.CUR_LANG, Locale.getDefault().getLanguage());

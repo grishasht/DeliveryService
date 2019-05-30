@@ -59,7 +59,7 @@ public class RoleFilter implements Filter {
         Role sessionRole = ((User) request.getSession().getAttribute(Constants.SESSION_USER)).getRole();
 
         if (!permissions.get(sessionRole).contains(requestURI)) {
-            request.getRequestDispatcher("/WEB-INF/errors/forb.jsp")
+            request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/errors/forb.jsp")
                     .forward(request, response);
         }
 

@@ -32,19 +32,27 @@
                 <a class="nav-link" href="/page/">Pricing</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/page/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="/page/" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Languages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'en'))}" href="#"><fmt:message key="locale.english"/></a>
-                    <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'ru'))}" href="#"><fmt:message key="locale.russian"/></a>
+                    <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'en'))}"
+                       href="#"><fmt:message key="locale.english"/></a>
+                    <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'ru'))}"
+                       href="#"><fmt:message key="locale.russian"/></a>
                 </div>
             </li>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder=<fmt:message key="header.form.login"/> aria-label="Login">
-                <input class="form-control mr-sm-2" type="password" placeholder=<fmt:message key="header.form.password"/> aria-label="Password">
-                <button class="btn btn-outline-success my-3 my-sm-0" type="submit"><fmt:message key="header.form.signin"/></button>
-                <button class="btn btn-outline-success my-3 my-sm-0" type="submit" formaction="${pageContext.request.contextPath}/page/reg_forward">
+                <input class="form-control mr-sm-2" type="text" placeholder=
+                <fmt:message key="header.form.login"/> aria-label="Login">
+                <input class="form-control mr-sm-2" type="password" placeholder=
+                <fmt:message key="header.form.password"/> aria-label="Password">
+                <button class="btn btn-outline-success my-3 my-sm-0" type="submit"><fmt:message
+                        key="header.form.signin"/></button>
+            </form>
+            <form class="form-inline" action="${pageContext.request.contextPath}/page/reg_forward?curLang=${sessionScope.curLang}">
+                <button class="btn btn-outline-success my-3 my-sm-0" type="submit">
                     <fmt:message key="header.form.signup"/></button>
             </form>
         </ul>
