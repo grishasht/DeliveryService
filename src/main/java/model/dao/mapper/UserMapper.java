@@ -14,10 +14,10 @@ public class UserMapper implements Mapper<User> {
 
         try {
             user.setId(resultSet.getInt(index[0]));
-            user.setEmail(resultSet.getString(index[1]));
-            user.setName(resultSet.getString(index[2]));
+            user.setName(resultSet.getString(index[1]));
+            user.setPassword(resultSet.getString(index[2]));
             user.setLogin(resultSet.getString(index[3]));
-            user.setPassword(resultSet.getString(index[4]));
+            user.setEmail(resultSet.getString(index[4]));
             String role = resultSet.getString(index[5]);
             Optional.ofNullable(role).ifPresent(a -> user.setRole(Role.contains(role)));
         } catch (SQLException e) {

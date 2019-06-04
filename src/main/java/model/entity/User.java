@@ -12,7 +12,7 @@ public class User {
     private String password;
     private Role role;
 
-    public User getGuest(){
+    public static User getGuest(){
         User user = new User();
 
         user.setLogin("");

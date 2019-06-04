@@ -22,19 +22,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/page/">YoursDelivery <span class="sr-only">(current)</span></a>
+            <li class="nav-item active" style="width: 300px">
+                <a class="nav-link" href="/page/" ><h3><fmt:message key="header.yourdelivery"/></h3>
+                    <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/page/">Features</a>
+                <a class="nav-link" href="/page/"><fmt:message key="header.service"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/page/">Pricing</a>
+                <a class="nav-link" href="/page/"><fmt:message key="header.pricing"/></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/page/" id="navbarDropdownMenuLink" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Languages
+                    <fmt:message key="header.language"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'en'))}"
@@ -43,18 +44,26 @@
                        href="#"><fmt:message key="locale.russian"/></a>
                 </div>
             </li>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder=
-                <fmt:message key="header.form.login"/> aria-label="Login">
-                <input class="form-control mr-sm-2" type="password" placeholder=
-                <fmt:message key="header.form.password"/> aria-label="Password">
-                <button class="btn btn-outline-success my-3 my-sm-0" type="submit"><fmt:message
-                        key="header.form.signin"/></button>
+            <form class="form-inline" method="post">
+                <input name="login"
+                       class="form-control mr-sm-2" type="text" placeholder=
+                       <fmt:message key="header.form.login"/> aria-label="Login">
+                <input name="password"
+                       class="form-control mr-sm-2" type="password" placeholder=
+                       <fmt:message key="header.form.password"/> aria-label="Password">
+                <button type="submit" class="btn btn-primary" formaction="${pageContext.request.contextPath}/page/login">
+                    <fmt:message key="header.form.signin"/>
+                </button>
             </form>
-            <form class="form-inline" action="${pageContext.request.contextPath}/page/reg_forward?curLang=${sessionScope.curLang}">
-                <button class="btn btn-outline-success my-3 my-sm-0" type="submit">
-                    <fmt:message key="header.form.signup"/></button>
-            </form>
+            <li class="nav-item mybutton">
+                <a class="btn nav-link rounded singup"
+                   href="${pageContext.request.contextPath}/page/reg_forward?curLang=${sessionScope.curLang}"><fmt:message
+                        key="header.form.signup"/></a>
+            </li>
+            <%--            <form class="form-inline" action="${pageContext.request.contextPath}/page/reg_forward?curLang=${sessionScope.curLang}">--%>
+            <%--                <button class="btn btn-outline-success my-3 my-sm-0" type="submit">--%>
+            <%--                    <fmt:message key="header.form.signup"/></button>--%>
+            <%--            </form>--%>
         </ul>
     </div>
 </nav>
