@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: hs
-  Date: 5/18/19
-  Time: 11:43 PM
+  Date: 6/6/19
+  Time: 9:02 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <title>Home</title>
+    <title>Service</title>
     <link  href="${pageContext.request.contextPath}/css/styles.css" type="text/css" rel="stylesheet">
     <link  href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
@@ -22,6 +22,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<jsp:include page="body.jsp"/>
+<jsp:include page="calculator.jsp"/>
 </body>
 </html>

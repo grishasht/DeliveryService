@@ -15,7 +15,6 @@ public class AddressMapper implements Mapper<Address> {
             address.setCountry(resultSet.getString(index[1]));
             address.setCity(resultSet.getString(index[2]));
             address.setStreet(resultSet.getString(index[3]));
-            address.setHouse(resultSet.getInt(index[4]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

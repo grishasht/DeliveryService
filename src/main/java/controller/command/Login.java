@@ -24,12 +24,10 @@ public class Login implements Command {
 
         if (!User.getGuest().equals(user)) {
             userService.authorize(user, request);
-            return "";
-            // "forward:/WEB-INF/user/index.jsp";
+            return "forward:/WEB-INF/user/index.jsp";
         } else {
-            return "";
-            //"redirect:/page/?curLang="
-                    //+ request.getSession().getAttribute(Constants.CUR_LANG);
+            return "redirect:/page/?curLang="
+                    + request.getSession().getAttribute(Constants.CUR_LANG);
         }
     }
 }

@@ -22,16 +22,16 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active" style="width: 250px">
-                <a class="nav-link" href="/page/" ><h3><fmt:message key="header.yourdelivery"/></h3>
+                <a class="nav-link" href="/page/"><h3><fmt:message key="header.yourdelivery"/></h3>
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/service_fwd?curLang=${sessionScope.curLang}"><fmt:message key="header.service"/></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/page/service_fwd?curLang=${sessionScope.curLang}"><fmt:message key="header.service"/></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}"><fmt:message key="header.my.requests"/></a>
+                   href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}"><fmt:message
+                        key="header.my.requests"/></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -45,18 +45,11 @@
                        href="#"><fmt:message key="locale.russian"/></a>
                 </div>
             </li>
-            <form class="form-inline" method="post">
-                <input name="login"
-                       class="form-control mr-sm-2" type="text" placeholder=
-                       <fmt:message key="header.form.login"/> aria-label="Login">
-                <input name="password"
-                       class="form-control mr-sm-2" type="password" placeholder=
-                       <fmt:message key="header.form.password"/> aria-label="Password">
-                <button type="submit" class="btn btn-primary"
-                        formaction="${pageContext.request.contextPath}/page/login?curLang=${sessionScope.curLang}">
-                    <fmt:message key="header.form.signin"/>
-                </button>
-            </form>
+            <li class="nav-item mybutton">
+                <a class="btn nav-link rounded"
+                   href="${pageContext.request.contextPath}/page/logout?curLang=${sessionScope.curLang}"><fmt:message
+                        key="header.form.logout"/></a>
+            </li>
             <li class="nav-item mybutton">
                 <a class="btn nav-link rounded singup"
                    href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}"><fmt:message

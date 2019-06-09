@@ -45,7 +45,7 @@ public class AccountJDBC extends JDBC implements AccountDao {
     @Override
     public List<Account> readAll() {
         List<Account> accounts = new LinkedList<>();
-        final String QUERY = "SELECT * FROM addresses";
+        final String QUERY = "SELECT * FROM countries";
         AccountMapper accountMapper = new AccountMapper();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)){

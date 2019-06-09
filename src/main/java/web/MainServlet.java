@@ -16,12 +16,14 @@ public class MainServlet extends HttpServlet {
     Map<String, Command> commandMap = new HashMap<>();
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) {
+
         commandMap.put("/", new Home());
         commandMap.put("/login", new Login());
         commandMap.put("/logout", new Logout());
         commandMap.put("/register", new Register());
-        commandMap.put("/reg_forward", new RegForward());
+        commandMap.put("/reg_fwd", new RegForward());
+        commandMap.put("/service_fwd", new ServiceForward());
 
         //getServletContext().setAttribute(USER_LIST, new LinkedList<User>());
     }

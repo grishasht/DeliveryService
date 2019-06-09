@@ -26,17 +26,17 @@ public class RoleFilter implements Filter {
         adminRef.add("/logout");
 
         userRef.add("/");
+        userRef.add("/reg_fwd");
+        userRef.add("/register");
         userRef.add("/logout");
-        userRef.add("/add_lug");
-        userRef.add("/remove_lug");
-        userRef.add("/my_requests");
-        userRef.add("/add_request");
-        userRef.add("/remove_request");
+        userRef.add("/requests");
+        userRef.add("/service_fwd");
 
         guestRef.add("/");
         guestRef.add("/login");
         guestRef.add("/register");
-        guestRef.add("/reg_forward");
+        guestRef.add("/reg_fwd");
+        guestRef.add("/service_fwd");
 
         permissions.put(Role.ADMIN, adminRef);
         permissions.put(Role.USER, userRef);
@@ -59,7 +59,7 @@ public class RoleFilter implements Filter {
         Role sessionRole = ((User) request.getSession().getAttribute(Constants.SESSION_USER)).getRole();
 
         if (!permissions.get(sessionRole).contains(requestURI)) {
-            request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/errors/forb.jsp")
+            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/errors/forb.jsp")
                     .forward(request, response);
         }
 
