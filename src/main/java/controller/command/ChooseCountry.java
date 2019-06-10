@@ -6,11 +6,11 @@ import model.util.Constants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ChooseCity implements Command {
+public class ChooseCountry implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String countryName = request.getParameter("city");
-        request.getSession().setAttribute("city", countryName);
+        String countryName = request.getParameter("country");
+        request.getSession().setAttribute("country", countryName);
         String role = ((User) request.getSession().getAttribute(Constants.SESSION_USER))
                 .getRole()
                 .getValue();

@@ -17,14 +17,13 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
 
     @Override
     public void create(Luggage entity) {
-        final String QUERY = "INSERT INTO luggage(type, weight, price)" +
-                "VALUES (?, ?, ?)";
+        final String QUERY = "INSERT INTO luggage(type, price)" +
+                "VALUES (?, ?)";
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC creating");
             preparedStatement.setString(1, entity.getType());
-            preparedStatement.setFloat(2, entity.getWeight());
             preparedStatement.setFloat(3, entity.getPrice());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in LuggageJDBC creating");
@@ -54,7 +53,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in LuggageJDBC readingAll");
 
                 while (resultSet.next()) {
-                    luggage.add(luggageMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4));
+                    luggage.add(luggageMapper.getEntityFromResSet(resultSet, 1, 2, 3));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in LuggageJDBC");
             }
@@ -69,14 +68,13 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
 
     @Override
     public void update(Integer id, Luggage entity) {
-        final String QUERY = "UPDATE luggage SET type = ?, weight = ?, price = ?" +
+        final String QUERY = "UPDATE luggage SET type = ?, price = ?" +
                 "WHERE id = " + id;
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC update");
             preparedStatement.setString(1, entity.getType());
-            preparedStatement.setFloat(2, entity.getWeight());
             preparedStatement.setFloat(3, entity.getPrice());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in LuggageJDBC update");

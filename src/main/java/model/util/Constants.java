@@ -9,4 +9,6 @@ public interface Constants {
     String EMAIL = "email";
     String PASSWORD = "password";
     String CONFIRM_PASSWORD = "confirmPassword";
+    String LUG_TYPE = "lugType";
+    String LUG_WEIGHT = "lugWeight";
 }

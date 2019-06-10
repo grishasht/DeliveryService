@@ -31,12 +31,25 @@ public class RoleFilter implements Filter {
         userRef.add("/logout");
         userRef.add("/requests");
         userRef.add("/service_fwd");
+        userRef.add("/service/choose_country");
+        userRef.add("/service/choose_city");
+        userRef.add("/service/choose_street");
+        userRef.add("/service/choose_house");
+        userRef.add("/service/choose_lug_type");
+        userRef.add("/service/create_req");
 
         guestRef.add("/");
         guestRef.add("/login");
         guestRef.add("/register");
         guestRef.add("/reg_fwd");
         guestRef.add("/service_fwd");
+        guestRef.add("/service/choose_country");
+        guestRef.add("/service/choose_city");
+        guestRef.add("/service/choose_street");
+        guestRef.add("/service/choose_house");
+        guestRef.add("/service/choose_lug_type");
+        guestRef.add("/service/choose_weight");
+        guestRef.add("/service/create_req");
 
         permissions.put(Role.ADMIN, adminRef);
         permissions.put(Role.USER, userRef);

@@ -24,6 +24,13 @@ public class MainServlet extends HttpServlet {
         commandMap.put("/register", new Register());
         commandMap.put("/reg_fwd", new RegForward());
         commandMap.put("/service_fwd", new ServiceForward());
+        commandMap.put("/service/choose_country", new ChooseCountry());
+        commandMap.put("/service/choose_city", new ChooseCity());
+        commandMap.put("/service/choose_street", new ChooseStreet());
+        commandMap.put("/service/choose_house", new ChooseHouse());
+        commandMap.put("/service/choose_lug_type", new ChooseLuggage());
+        commandMap.put("/service/choose_weight", new ChooseWeight());
+        commandMap.put("/service/create_req", new RequestAdd());
 
         //getServletContext().setAttribute(USER_LIST, new LinkedList<User>());
     }
