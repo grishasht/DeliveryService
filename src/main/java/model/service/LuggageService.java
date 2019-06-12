@@ -26,4 +26,8 @@ public class LuggageService {
                 .getPrice();
         return price;
     }
+
+    public Float getTotalPrice(Float price, String weight, Float distanceKoef){
+        return price * Float.valueOf(weight) * distanceKoef;
+    }
 }

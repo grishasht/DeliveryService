@@ -33,14 +33,14 @@ public class Register implements Command {
         String validationInputErr = userService.validationInputErr(user, resourceBundle);
         String userPresentError = userService.userPresentError(user, resourceBundle);
         if (!"".equals(validationInputErr)){
-            userService.setResponse(400, validationInputErr, response);
-            return "forward:/WEB-INF/errors/forb.jsp";
+//            userService.setResponse(400, validationInputErr, response);
+            return "forward:/WEB-INF/errors/inv_input.jsp";
         } else if (!userService.confirmPassword(password, confirmPassword)){
-            userService.setResponse(400, resourceBundle.getString("passwords.not.same"), response);
-            return "forward:/WEB-INF/errors/forb.jsp";
+//            userService.setResponse(400, resourceBundle.getString("passwords.not.same"), response);
+            return "forward:/WEB-INF/errors/inv_pswd.jsp";
         } else if (!"successful.register".equals(userPresentError)){
-            userService.setResponse(400, userPresentError, response);
-            return "forward:/WEB-INF/errors/forb.jsp";
+//            userService.setResponse(400, userPresentError, response);
+            return "forward:/WEB-INF/errors/usr_pres.jsp";
         } else {
             userService.registerUser(user);
             userService.authorize(user, request);

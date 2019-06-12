@@ -53,7 +53,7 @@ public class AddressJDBC extends JDBC implements AddressDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in AddressJDBC readAll");
 
                 while (resultSet.next()) {
-                    addresses.add(addressMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4));
+                    addresses.add(addressMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in AddressJDBC");
             }

@@ -23,7 +23,8 @@ public class MainServlet extends HttpServlet {
         commandMap.put("/logout", new Logout());
         commandMap.put("/register", new Register());
         commandMap.put("/reg_fwd", new RegForward());
-        commandMap.put("/service_fwd", new ServiceForward());
+        commandMap.put("/service", new ServiceForward());
+        commandMap.put("/commit_req", new CommitRequest());
         commandMap.put("/service/choose_country", new ChooseCountry());
         commandMap.put("/service/choose_city", new ChooseCity());
         commandMap.put("/service/choose_street", new ChooseStreet());
@@ -31,6 +32,7 @@ public class MainServlet extends HttpServlet {
         commandMap.put("/service/choose_lug_type", new ChooseLuggage());
         commandMap.put("/service/choose_weight", new ChooseWeight());
         commandMap.put("/service/create_req", new RequestAdd());
+        commandMap.put("/service/reset", new ResetFields());
 
         //getServletContext().setAttribute(USER_LIST, new LinkedList<User>());
     }

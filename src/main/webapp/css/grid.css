@@ -29,7 +29,7 @@
 /*    grid-row-end: 6;*/
 /*}*/
 
-.bat-dest{
+.bat-dest {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 7;
@@ -58,4 +58,21 @@
     grid-column-end: 2;
     grid-row-start: 3;
     grid-row-end: 4;
+}
+
+.request-box {
+    border: fuchsia solid 2px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.req-pos {
+    border: #0b2e13 solid 2px;
+    margin: 10% 20% 30% 20%;
+}
+
+.btn-size {
+    width: 45%;
 }

@@ -40,4 +40,12 @@ public class AddressService {
         return streets;
     }
 
+    public Float getCoefficient(String street){
+        return addresses.stream()
+                .filter(address -> address.getStreet().equals(street))
+                .findAny()
+                .get()
+                .getCoefficient();
+    }
+
 }

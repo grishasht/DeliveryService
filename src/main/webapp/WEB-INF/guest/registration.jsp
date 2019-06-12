@@ -50,7 +50,9 @@
                    type="password" class="form-control m-md-2" id="exampleInputConfirmPassword"
                    placeholder="<fmt:message key="register.enter.password"/>" required>
         </div>
-        <button type="submit" class="btn btn-primary" formaction="${pageContext.request.contextPath}/page/register">
+        <button type="submit" class="btn btn-primary"
+                name="curLang" value="${sessionScope.curLang}"
+                formaction="${pageContext.request.contextPath}/page/register">
             <fmt:message key="register.submit"/>
         </button>
     </form>

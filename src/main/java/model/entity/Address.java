@@ -8,6 +8,7 @@ public class Address {
     private String city;
     private String street;
     private Integer house;
+    private Float coefficient;
 
     public Integer getId() {
         return id;
@@ -49,6 +50,14 @@ public class Address {
         this.house = house;
     }
 
+    public Float getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(Float coefficient) {
+        this.coefficient = coefficient;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,4 +85,5 @@ public class Address {
                 ", house=" + house +
                 '}';
     }
+
 }

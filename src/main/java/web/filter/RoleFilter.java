@@ -30,19 +30,22 @@ public class RoleFilter implements Filter {
         userRef.add("/register");
         userRef.add("/logout");
         userRef.add("/requests");
-        userRef.add("/service_fwd");
+        userRef.add("/service");
+        userRef.add("/commit_req");
         userRef.add("/service/choose_country");
         userRef.add("/service/choose_city");
         userRef.add("/service/choose_street");
         userRef.add("/service/choose_house");
         userRef.add("/service/choose_lug_type");
         userRef.add("/service/create_req");
+        userRef.add("/service/reset");
 
         guestRef.add("/");
         guestRef.add("/login");
         guestRef.add("/register");
         guestRef.add("/reg_fwd");
-        guestRef.add("/service_fwd");
+        guestRef.add("/service");
+        guestRef.add("/commit_req");
         guestRef.add("/service/choose_country");
         guestRef.add("/service/choose_city");
         guestRef.add("/service/choose_street");
@@ -50,6 +53,7 @@ public class RoleFilter implements Filter {
         guestRef.add("/service/choose_lug_type");
         guestRef.add("/service/choose_weight");
         guestRef.add("/service/create_req");
+        guestRef.add("/service/reset");
 
         permissions.put(Role.ADMIN, adminRef);
         permissions.put(Role.USER, userRef);
@@ -72,7 +76,7 @@ public class RoleFilter implements Filter {
         Role sessionRole = ((User) request.getSession().getAttribute(Constants.SESSION_USER)).getRole();
 
         if (!permissions.get(sessionRole).contains(requestURI)) {
-            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/errors/forb.jsp")
+            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/errors/notFound.jsp")
                     .forward(request, response);
         }
 

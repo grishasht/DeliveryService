@@ -26,7 +26,7 @@
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/page/service_fwd?curLang=${sessionScope.curLang}"><fmt:message key="header.service"/></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/page/service?curLang=${sessionScope.curLang}"><fmt:message key="header.service"/></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"

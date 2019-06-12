@@ -11,4 +11,9 @@ public interface Constants {
     String CONFIRM_PASSWORD = "confirmPassword";
     String LUG_TYPE = "lugType";
     String LUG_WEIGHT = "lugWeight";
+    String STREET_NAME = "street";
+    String HOUSE_NUM = "houseNum";
+    String COUNTRY_NAME = "country";
+    String CITY_NAME = "city";
+    String SHOW_REQ = "showReq";
 }
