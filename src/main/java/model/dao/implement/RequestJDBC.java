@@ -97,8 +97,8 @@ public class RequestJDBC extends JDBC implements RequestDao {
     @Override
     public void update(Integer id, Request entity) {
         final String QUERY = "UPDATE requests SET user_id = ?, luggage_id = ?, " +
-                "address_id = ?, send_date = ?, receive_date = ?, weight = ?" +
-                "WHERE id = " + id;
+                "address_id = ?, send_date = ?, receive_date = ?, weight = ?, price = ?" +
+                "WHERE user_id = " + id;
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
 
