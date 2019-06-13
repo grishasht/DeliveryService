@@ -17,8 +17,9 @@ public class RequestJDBC extends JDBC implements RequestDao {
 
     @Override
     public void create(Request entity) {
-        final String QUERY = "INSERT INTO requests(user_id, luggage_id, address_id, send_date, receive_date) " +
-                " VALUES (?, ?, ?, ?, ?)";
+        final String QUERY = "INSERT INTO requests(user_id, luggage_id, address_id, " +
+                "send_date, receive_date, weight, house, price) " +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
 
@@ -29,6 +30,9 @@ public class RequestJDBC extends JDBC implements RequestDao {
             preparedStatement.setInt(3, entity.getAddressId());
             preparedStatement.setDate(4, entity.getSendDate());
             preparedStatement.setDate(5, entity.getReceiveDate());
+            preparedStatement.setFloat(6, entity.getWeight());
+            preparedStatement.setInt(7, entity.getHouseNum());
+            preparedStatement.setFloat(8, entity.getPrice());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in RequestJDBC creating");
@@ -42,7 +46,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
     @Override
     public List<Request> read(Integer id) {
         List<Request> requests = new LinkedList<>();
-        final String QUERY = "SELECT * FROM requests WHERE id = " + id;
+        final String QUERY = "SELECT * FROM requests WHERE user_id = " + id;
         RequestMapper requestMapper = new RequestMapper();
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
@@ -52,7 +56,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC read");
 
                 while (resultSet.next()) {
-                    requests.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6));
+                    requests.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in RequestJDBC");
             }
@@ -77,7 +81,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC readAll");
 
                 while (resultSet.next()) {
-                    addresses.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6));
+                    addresses.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in RequestJDBC");
             }
@@ -93,7 +97,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
     @Override
     public void update(Integer id, Request entity) {
         final String QUERY = "UPDATE requests SET user_id = ?, luggage_id = ?, " +
-                "address_id = ?, send_date = ?, receive_date = ?" +
+                "address_id = ?, send_date = ?, receive_date = ?, weight = ?" +
                 "WHERE id = " + id;
 
         try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
@@ -105,6 +109,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
             preparedStatement.setInt(3, entity.getAddressId());
             preparedStatement.setDate(4, entity.getSendDate());
             preparedStatement.setDate(5, entity.getReceiveDate());
+            preparedStatement.setFloat(6, entity.getWeight());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in RequestJDBC update");

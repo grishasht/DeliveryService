@@ -8,6 +8,7 @@ import model.util.Constants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -19,8 +20,8 @@ public class UserService {
     private static final String USERNAME_REGEX = "[^\\^%$'\"#@!?\\-+=\\s]{1,20}";
 
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private UserDao userDao = daoFactory.createUserDao();
+    private static DaoFactory daoFactory = DaoFactory.getInstance();
+    private static UserDao userDao = daoFactory.createUserDao();
 
     public void registerUser(User user) {
         userDao.create(user);
@@ -100,6 +101,15 @@ public class UserService {
 
     private Boolean validatePassword(String password){
         return password.matches(PSWD_REGEX);
+    }
+
+    public static Integer getUserId(String login) {
+        List<User> users = userDao.readAll();
+        return users.stream()
+                .filter(user -> user.getLogin().equals(login))
+                .findAny()
+                .get()
+                .getId();
     }
 
 }

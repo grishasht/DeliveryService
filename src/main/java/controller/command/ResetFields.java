@@ -12,18 +12,27 @@ public class ResetFields implements Command {
         String role = ((User) request.getSession().getAttribute(Constants.SESSION_USER))
                 .getRole()
                 .getValue();
+
         if (request.getSession().getAttribute(Constants.COUNTRY_NAME) != null)
             request.getSession().removeAttribute(Constants.COUNTRY_NAME);
+
         if (request.getSession().getAttribute(Constants.CITY_NAME) != null)
             request.getSession().removeAttribute(Constants.CITY_NAME);
+
         if (request.getSession().getAttribute(Constants.STREET_NAME) != null)
             request.getSession().removeAttribute(Constants.STREET_NAME);
+
         if (request.getSession().getAttribute(Constants.HOUSE_NUM) != null)
             request.getSession().removeAttribute(Constants.HOUSE_NUM);
+
         if (request.getSession().getAttribute(Constants.LUG_TYPE) != null)
             request.getSession().removeAttribute(Constants.LUG_TYPE);
+
         if (request.getSession().getAttribute(Constants.LUG_WEIGHT) != null)
             request.getSession().removeAttribute(Constants.LUG_WEIGHT);
+
+        if (request.getSession().getAttribute(Constants.SHOW_REQ) != null)
+            request.getSession().removeAttribute(Constants.SHOW_REQ);
 
         return "forward:/WEB-INF/" + role + "/service.jsp";
     }

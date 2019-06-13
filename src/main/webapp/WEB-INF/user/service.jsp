@@ -17,6 +17,7 @@
     <title>Service</title>
     <link  href="${pageContext.request.contextPath}/css/styles.css" type="text/css" rel="stylesheet">
     <link  href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link  href="${pageContext.request.contextPath}/css/grid.css" rel="stylesheet" type="text/css">
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 </head>

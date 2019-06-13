@@ -12,9 +12,8 @@ public class RequestAdd implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String role = ((User) request.getSession().getAttribute(Constants.SESSION_USER))
-                .getRole()
-                .getValue();
+        User user = (User) request.getSession().getAttribute(Constants.SESSION_USER);
+        String role = user.getRole().getValue();
 
         String country = (String) request.getSession().getAttribute(Constants.COUNTRY_NAME);
         String city = (String) request.getSession().getAttribute(Constants.CITY_NAME);

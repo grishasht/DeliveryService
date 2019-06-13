@@ -10,6 +10,17 @@ public class Request {
     private Integer addressId;
     private Date sendDate;
     private Date receiveDate;
+    private Float weight;
+    private Integer houseNum;
+    private Float price;
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 
     public Integer getId() {
         return id;
@@ -59,22 +70,20 @@ public class Request {
         this.receiveDate = receiveDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request that = (Request) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(luggageId, that.luggageId) &&
-                Objects.equals(addressId, that.addressId) &&
-                Objects.equals(sendDate, that.sendDate) &&
-                Objects.equals(receiveDate, that.receiveDate);
+    public Float getWeight() {
+        return weight;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userId, luggageId, addressId, sendDate, receiveDate);
+    public void setWeight(Float weight) {
+        this.weight = weight;
+    }
+
+    public Integer getHouseNum() {
+        return houseNum;
+    }
+
+    public void setHouseNum(Integer houseNum) {
+        this.houseNum = houseNum;
     }
 
     @Override
@@ -86,6 +95,31 @@ public class Request {
                 ", addressId=" + addressId +
                 ", sendDate=" + sendDate +
                 ", receiveDate=" + receiveDate +
+                ", weight=" + weight +
+                ", houseNum=" + houseNum +
+                ", price=" + price +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return Objects.equals(id, request.id) &&
+                Objects.equals(userId, request.userId) &&
+                Objects.equals(luggageId, request.luggageId) &&
+                Objects.equals(addressId, request.addressId) &&
+                Objects.equals(sendDate, request.sendDate) &&
+                Objects.equals(receiveDate, request.receiveDate) &&
+                Objects.equals(weight, request.weight) &&
+                Objects.equals(houseNum, request.houseNum) &&
+                Objects.equals(price, request.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, luggageId, addressId, sendDate, receiveDate, weight, houseNum, price);
+    }
+
 }

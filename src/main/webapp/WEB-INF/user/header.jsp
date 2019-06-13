@@ -30,7 +30,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}"><fmt:message
+                   href="${pageContext.request.contextPath}/page/my_requests?curLang=${sessionScope.curLang}"><fmt:message
                         key="header.my.requests"/></a>
             </li>
             <li class="nav-item dropdown">

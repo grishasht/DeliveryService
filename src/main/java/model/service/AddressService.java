@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 public class AddressService {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private AddressDao addressDao = daoFactory.createAddressDao();
-    private List<Address> addresses = addressDao.readAll();
+    private static DaoFactory daoFactory = DaoFactory.getInstance();
+    private static AddressDao addressDao = daoFactory.createAddressDao();
+    private static List<Address> addresses = addressDao.readAll();
 
 
     public Set<String> getCountries() {
@@ -41,11 +41,20 @@ public class AddressService {
     }
 
     public Float getCoefficient(String street){
+        Address empty = new Address();
+        empty.setCoefficient(0f);
+        return addresses.stream()
+                .filter(address -> address.getStreet().equals(street))
+                .findAny()
+                .orElse(empty)
+                .getCoefficient();
+    }
+
+    public static Integer getAddressId(String street){
         return addresses.stream()
                 .filter(address -> address.getStreet().equals(street))
                 .findAny()
                 .get()
-                .getCoefficient();
+                .getId();
     }
-
 }

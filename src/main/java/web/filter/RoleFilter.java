@@ -32,6 +32,7 @@ public class RoleFilter implements Filter {
         userRef.add("/requests");
         userRef.add("/service");
         userRef.add("/commit_req");
+        userRef.add("/my_requests");
         userRef.add("/service/choose_country");
         userRef.add("/service/choose_city");
         userRef.add("/service/choose_street");
@@ -76,7 +77,7 @@ public class RoleFilter implements Filter {
         Role sessionRole = ((User) request.getSession().getAttribute(Constants.SESSION_USER)).getRole();
 
         if (!permissions.get(sessionRole).contains(requestURI)) {
-            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/errors/notFound.jsp")
+            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/errors/not_found.jsp")
                     .forward(request, response);
         }
 

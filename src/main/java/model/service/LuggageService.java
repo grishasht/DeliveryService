@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LuggageService {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private LuggageDao luggageDao = daoFactory.createLuggageDao();
-    private List<Luggage> luggage = luggageDao.readAll();
+    private static DaoFactory daoFactory = DaoFactory.getInstance();
+    private static LuggageDao luggageDao = daoFactory.createLuggageDao();
+    private static List<Luggage> luggage = luggageDao.readAll();
 
-    public List<String> getLuggageType(){
+    public List<String> getLuggageType() {
         return luggage.stream()
                 .map(Luggage::getType)
                 .collect(Collectors.toList());
     }
 
-    public Float getLuggagePrice(String luggageType){
+    public Float getLuggagePrice(String luggageType) {
         Float price = luggage.stream()
                 .filter(luggage1 -> luggage1.getType().equals(luggageType))
                 .findAny()
@@ -27,7 +27,19 @@ public class LuggageService {
         return price;
     }
 
-    public Float getTotalPrice(Float price, String weight, Float distanceKoef){
-        return price * Float.valueOf(weight) * distanceKoef;
+    public Float getTotalPrice(Float price, String weight, Float distanceCoef) {
+        try {
+            return price * Float.valueOf(weight) * distanceCoef;
+        } catch (NumberFormatException e){
+            return 0f;
+        }
+    }
+
+    public static Integer getLuggageId(String type) {
+        return luggage.stream()
+                .filter(luggage1 -> luggage1.getType().equals(type))
+                .findAny()
+                .get()
+                .getId();
     }
 }

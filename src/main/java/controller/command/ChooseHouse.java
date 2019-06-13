@@ -15,7 +15,6 @@ public class ChooseHouse implements Command {
                 .getRole()
                 .getValue();
 
-
         return "forward:/WEB-INF/" + role + "/service.jsp";
     }
 }

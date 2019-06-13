@@ -137,7 +137,7 @@
             <div>
                 <c:choose>
                     <c:when test="${sessionScope.lugType.equals('Letters')}">
-                        <h5>calculator.input.lug${luggageService.getLuggagePrice(sessionScope.lugType)}$</h5>
+                        <h5><fmt:message key="calculator.show.price.kg"/>${luggageService.getLuggagePrice(sessionScope.lugType)}$</h5>
                     </c:when>
                     <c:when test="${sessionScope.lugType.equals('Huge Transport')}">
                         <h5><fmt:message key="calculator.show.price"/>${luggageService.getLuggagePrice(sessionScope.lugType)}$</h5>
