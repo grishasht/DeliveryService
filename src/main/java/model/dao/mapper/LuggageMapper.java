@@ -13,7 +13,7 @@ public class LuggageMapper implements Mapper<Luggage> {
         try {
             luggage.setId(resultSet.getInt(index[0]));
             luggage.setType(resultSet.getString(index[1]));
-            luggage.setWeight(resultSet.getFloat(index[2]));
+            luggage.setPrice(resultSet.getFloat(index[2]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

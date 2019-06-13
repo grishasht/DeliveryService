@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MyRequests implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+
+        return "forward:/WEB-INF/user/my_requests.jsp";
     }
 }

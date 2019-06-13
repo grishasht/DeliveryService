@@ -48,7 +48,7 @@
       var ownKeys = Object.keys(source);
 
       if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(web.filters(function (sym) {
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
           return Object.getOwnPropertyDescriptor(source, sym).enumerable;
         }));
       }
@@ -2236,7 +2236,7 @@
     }
 
     // use `filter` to obtain the same behavior of `find`
-    return web.filters(check)[0];
+    return arr.filter(check)[0];
   }
 
   /**
@@ -6097,7 +6097,7 @@
 
       _proto._clear = function _clear() {
         var nodes = [].slice.call(document.querySelectorAll(this._selector));
-        web.filters(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
+        $$$1(nodes).filter(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
       }; // Static
 
 

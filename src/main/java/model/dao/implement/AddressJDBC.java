@@ -17,7 +17,7 @@ public class AddressJDBC extends JDBC implements AddressDao {
 
     @Override
     public void create(Address entity) {
-        final String QUERY = "INSERT INTO addresses(country, city, street, house) VALUES (?, ?, ?, ?)";
+        final String QUERY = "INSERT INTO countries(country, city, street) VALUES (?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
@@ -25,7 +25,6 @@ public class AddressJDBC extends JDBC implements AddressDao {
             preparedStatement.setString(1, entity.getCountry());
             preparedStatement.setString(2, entity.getCity());
             preparedStatement.setString(3, entity.getStreet());
-            preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC creating");
             log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AddressJDBC creating");
@@ -69,7 +68,7 @@ public class AddressJDBC extends JDBC implements AddressDao {
 
     @Override
     public void update(Integer id, Address entity) {
-        final String QUERY = "UPDATE addresses SET country = ?, city = ?, street = ?, house = ?" +
+        final String QUERY = "UPDATE countries SET country = ?, city = ?, street = ?" +
                 "WHERE id = " + id;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
@@ -78,7 +77,6 @@ public class AddressJDBC extends JDBC implements AddressDao {
             preparedStatement.setString(1, entity.getCountry());
             preparedStatement.setString(2, entity.getCity());
             preparedStatement.setString(3, entity.getStreet());
-            preparedStatement.setInt(4, entity.getHouse());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AddressJDBC update");
@@ -91,7 +89,7 @@ public class AddressJDBC extends JDBC implements AddressDao {
 
     @Override
     public void delete(Integer id) {
-        final String QUERY = "DELETE FROM addresses WHERE id = " + id;
+        final String QUERY = "DELETE FROM countries WHERE id = " + id;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AddressJDBC deleting");

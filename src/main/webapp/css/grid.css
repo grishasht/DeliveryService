@@ -1,0 +1,78 @@
+.wrap {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: auto;
+}
+
+.user-container {
+    border: #0b2e13 dashed 2px;
+}
+
+/*.country-box {*/
+/*    grid-column-start: 1;*/
+/*    grid-column-end: 2;*/
+/*    grid-row-start: 1;*/
+/*    grid-row-end: 2;*/
+/*}*/
+
+/*.city-box {*/
+/*    grid-column-start: 1;*/
+/*    grid-column-end: 2;*/
+/*    grid-row-start: 3;*/
+/*    grid-row-end: 4;*/
+/*}*/
+
+/*.street-box{*/
+/*    grid-column-start: 1;*/
+/*    grid-column-end: 2;*/
+/*    grid-row-start: 5;*/
+/*    grid-row-end: 6;*/
+/*}*/
+
+.bat-dest {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 7;
+    grid-row-end: 8;
+}
+
+.address-box {
+    border: fuchsia solid 2px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.luggage-box {
+    border: fuchsia solid 2px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.crt-req-btn {
+    border: fuchsia solid 2px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.request-box {
+    border: fuchsia solid 2px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.req-pos {
+    border: #0b2e13 solid 2px;
+    margin: 10% 20% 30% 20%;
+}
+
+.btn-size {
+    width: 45%;
+}

@@ -44,7 +44,15 @@
                    type="password" class="form-control m-md-2" id="exampleInputPassword1"
                    placeholder="<fmt:message key="register.enter.password"/>" required>
         </div>
-        <button type="submit" class="btn btn-primary" formaction="${pageContext.request.contextPath}/page/register">
+        <div class="form-group">
+            <label for="exampleInputConfirmPassword"><fmt:message key="register.confirm.password"/></label>
+            <input name="confirmPassword"
+                   type="password" class="form-control m-md-2" id="exampleInputConfirmPassword"
+                   placeholder="<fmt:message key="register.enter.password"/>" required>
+        </div>
+        <button type="submit" class="btn btn-primary"
+                name="curLang" value="${sessionScope.curLang}"
+                formaction="${pageContext.request.contextPath}/page/register">
             <fmt:message key="register.submit"/>
         </button>
     </form>

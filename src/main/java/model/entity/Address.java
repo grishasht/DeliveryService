@@ -7,7 +7,7 @@ public class Address {
     private String country;
     private String city;
     private String street;
-    private Integer house;
+    private Float coefficient;
 
     public Integer getId() {
         return id;
@@ -41,12 +41,12 @@ public class Address {
         this.street = street;
     }
 
-    public Integer getHouse() {
-        return house;
+    public Float getCoefficient() {
+        return coefficient;
     }
 
-    public void setHouse(Integer house) {
-        this.house = house;
+    public void setCoefficient(Float coefficient) {
+        this.coefficient = coefficient;
     }
 
     @Override
@@ -57,13 +57,12 @@ public class Address {
         return Objects.equals(id, address.id) &&
                 Objects.equals(country, address.country) &&
                 Objects.equals(city, address.city) &&
-                Objects.equals(street, address.street) &&
-                Objects.equals(house, address.house);
+                Objects.equals(street, address.street);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, country, city, street, house);
+        return Objects.hash(id, country, city, street);
     }
 
     @Override
@@ -73,7 +72,7 @@ public class Address {
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", house=" + house +
                 '}';
     }
+
 }
