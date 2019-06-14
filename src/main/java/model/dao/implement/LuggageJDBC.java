@@ -3,6 +3,7 @@ package model.dao.implement;
 import model.dao.LuggageDao;
 import model.dao.mapper.LuggageMapper;
 import model.entity.Luggage;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
         final String QUERY = "INSERT INTO luggage(type, price)" +
                 "VALUES (?, ?)";
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC creating");
             preparedStatement.setString(1, entity.getType());
@@ -46,7 +47,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
         final String QUERY = "SELECT * FROM luggage";
         LuggageMapper luggageMapper = new LuggageMapper();
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC readingAll");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -59,7 +60,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
             }
             log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in LuggageJDBC readAll");
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in LuggageJDBC");
         }
 
@@ -71,7 +72,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
         final String QUERY = "UPDATE luggage SET type = ?, price = ?" +
                 "WHERE id = " + id;
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC update");
             preparedStatement.setString(1, entity.getType());
@@ -90,7 +91,7 @@ public class LuggageJDBC extends JDBC implements LuggageDao {
     public void delete(Integer id) {
         final String QUERY = "DELETE FROM luggage WHERE id = " + id;
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in LuggageJDBC deleting");
             preparedStatement.execute();

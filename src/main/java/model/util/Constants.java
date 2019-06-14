@@ -16,4 +16,9 @@ public interface Constants {
     String COUNTRY_NAME = "country";
     String CITY_NAME = "city";
     String SHOW_REQ = "showReq";
+    String REQ_ID = "reqId";
+    String TOTAL_PRICE = "totPrice";
+    String ACCOUNT_ID = "accId";
+    String ACC_CREATE_TIME = "crtTime";
+    String ACCOUNT = "account";
 }

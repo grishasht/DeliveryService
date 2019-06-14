@@ -12,13 +12,16 @@ public class RequestMapper implements Mapper<Request> {
 
         try {
             request.setId(resultSet.getInt(index[0]));
-            request.setUserId(resultSet.getInt(index[1]));
-            request.setLuggageId(resultSet.getInt(index[2]));
-            request.setAddressId(resultSet.getInt(index[3]));
-            request.setSendDate(resultSet.getDate(index[4]));
-            request.setReceiveDate(resultSet.getDate(index[5]));
-            request.setWeight(resultSet.getFloat(index[6]));
-            request.setPrice(resultSet.getFloat(index[7]));
+            request.setCountry(resultSet.getString(index[1]));
+            request.setCity(resultSet.getString(index[2]));
+            request.setStreet(resultSet.getString(index[3]));
+            request.setHouseNum(resultSet.getInt(index[4]));
+            request.setLuggage(resultSet.getString(index[5]));
+            request.setPrice(resultSet.getFloat(index[6]));
+            request.setSendDate(resultSet.getDate(index[7]));
+            request.setReceiveDate(resultSet.getDate(index[8]));
+            request.setWeight(resultSet.getFloat(index[9]));
+            request.setTotalPrice(resultSet.getFloat(index[10]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

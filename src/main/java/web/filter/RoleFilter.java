@@ -33,6 +33,8 @@ public class RoleFilter implements Filter {
         userRef.add("/service");
         userRef.add("/commit_req");
         userRef.add("/my_requests");
+        userRef.add("/my_requests/pay");
+        userRef.add("/my_requests/remove");
         userRef.add("/service/choose_country");
         userRef.add("/service/choose_city");
         userRef.add("/service/choose_street");

@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Account {
     private Integer id;
-    private Integer applicationId;
-    private Integer amount;
+    private Integer requestId;
+    private Float amount;
     private Date date;
     private Boolean isPaid;
 
@@ -18,19 +18,19 @@ public class Account {
         this.id = id;
     }
 
-    public Integer getApplicationId() {
-        return applicationId;
+    public Integer getRequestId() {
+        return requestId;
     }
 
-    public void setApplicationId(Integer applicationId) {
-        this.applicationId = applicationId;
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
     }
 
-    public Integer getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 
@@ -56,7 +56,7 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return Objects.equals(id, account.id) &&
-                Objects.equals(applicationId, account.applicationId) &&
+                Objects.equals(requestId, account.requestId) &&
                 Objects.equals(amount, account.amount) &&
                 Objects.equals(date, account.date) &&
                 Objects.equals(isPaid, account.isPaid);
@@ -64,14 +64,14 @@ public class Account {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, applicationId, amount, date, isPaid);
+        return Objects.hash(id, requestId, amount, date, isPaid);
     }
 
     @Override
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", applicationId=" + applicationId +
+                ", requestId=" + requestId +
                 ", amount=" + amount +
                 ", date=" + date +
                 ", isPaid=" + isPaid +

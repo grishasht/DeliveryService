@@ -3,6 +3,7 @@ package model.dao.implement;
 import model.dao.RequestDao;
 import model.dao.mapper.RequestMapper;
 import model.entity.Request;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 "send_date, receive_date, weight, house, price) " +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC creating");
 
@@ -46,17 +47,33 @@ public class RequestJDBC extends JDBC implements RequestDao {
     @Override
     public List<Request> read(Integer id) {
         List<Request> requests = new LinkedList<>();
-        final String QUERY = "SELECT * FROM requests WHERE user_id = " + id;
+        final String QUERY = "SELECT req.id,\n" +
+                "       a.country,\n" +
+                "       a.city,\n" +
+                "       a.street,\n" +
+                "       req.house,\n" +
+                "       l.type,\n" +
+                "       l.price,\n" +
+                "       req.send_date,\n" +
+                "       req.receive_date,\n" +
+                "       req.weight,\n" +
+                "       req.price\n" +
+                "FROM requests AS req\n" +
+                "         LEFT JOIN users u on req.user_id = u.id\n" +
+                "         LEFT JOIN addresses a on req.address_id = a.id\n" +
+                "         LEFT JOIN luggage l on req.luggage_id = l.id\n" +
+                "WHERE user_id = " + id;
+
         RequestMapper requestMapper = new RequestMapper();
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC read");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC read");
 
                 while (resultSet.next()) {
-                    requests.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
+                    requests.add(requestMapper.getEntityFromResSet(resultSet, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in RequestJDBC");
             }
@@ -75,7 +92,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
         final String QUERY = "SELECT * FROM requests";
         RequestMapper requestMapper = new RequestMapper();
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC readAll");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC readAll");
@@ -100,7 +117,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 "address_id = ?, send_date = ?, receive_date = ?, weight = ?, price = ?" +
                 "WHERE user_id = " + id;
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC update");
 
@@ -125,7 +142,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
     public void delete(Integer id) {
         final String QUERY = "DELETE FROM requests WHERE id = " + id;
 
-        try (PreparedStatement preparedStatement =connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC deleting");
 

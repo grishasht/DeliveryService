@@ -3,6 +3,7 @@ package model.dao.implement;
 import model.dao.AccountDao;
 import model.dao.mapper.AccountMapper;
 import model.entity.Account;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,22 +18,23 @@ public class AccountJDBC extends JDBC implements AccountDao {
 
     @Override
     public void create(Account entity) {
-        final String QUERY = "INSERT INTO accounts(APPLICATION_ID, AMOUNT, DATE, IS_PAID)" +
+        final String QUERY = "INSERT INTO accounts(request_id, amount, date, is_paid) " +
                 "VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC create");
 
-            preparedStatement.setInt(1, entity.getApplicationId());
-            preparedStatement.setInt(2, entity.getAmount());
+            preparedStatement.setInt(1, entity.getRequestId());
+            preparedStatement.setFloat(2, entity.getAmount());
             preparedStatement.setDate(3, entity.getDate());
             preparedStatement.setBoolean(4, entity.getPaid());
 
-            preparedStatement.execute(QUERY);
+            preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC create");
             log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in AccountJDBC create");
 
         } catch (SQLException e) {
+            e.printStackTrace();
             log.error(properties.getProperty("SQL_EXC_WHILE_CREATE") + "in AccountJDBC");
         }
     }
@@ -45,10 +47,10 @@ public class AccountJDBC extends JDBC implements AccountDao {
     @Override
     public List<Account> readAll() {
         List<Account> accounts = new LinkedList<>();
-        final String QUERY = "SELECT * FROM countries";
+        final String QUERY = "SELECT * FROM accounts";
         AccountMapper accountMapper = new AccountMapper();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC readAll");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -77,7 +79,7 @@ public class AccountJDBC extends JDBC implements AccountDao {
     public void delete(Integer id) {
         final String QUERY = "DELETE FROM accounts WHERE id = " + id;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY)) {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in AccountJDBC deleting");
             preparedStatement.execute();
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in AccountJDBC deleting");

@@ -12,10 +12,10 @@ public class AccountMapper implements Mapper<Account> {
 
         try {
             account.setId(resultSet.getInt(index[0]));
-            account.setAmount(resultSet.getInt(index[1]));
-            account.setDate(resultSet.getDate(index[2]));
-            account.setPaid(resultSet.getBoolean(index[3]));
-            account.setApplicationId(resultSet.getInt(index[4]));
+            account.setRequestId(resultSet.getInt(index[1]));
+            account.setAmount(resultSet.getFloat(index[2]));
+            account.setDate(resultSet.getDate(index[3]));
+            account.setPaid(resultSet.getBoolean(index[4]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

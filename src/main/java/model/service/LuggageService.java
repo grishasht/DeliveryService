@@ -18,7 +18,7 @@ public class LuggageService {
                 .collect(Collectors.toList());
     }
 
-    public Float getLuggagePrice(String luggageType) {
+    public static Float getLuggagePrice(String luggageType) {
         Float price = luggage.stream()
                 .filter(luggage1 -> luggage1.getType().equals(luggageType))
                 .findAny()
@@ -27,7 +27,7 @@ public class LuggageService {
         return price;
     }
 
-    public Float getTotalPrice(Float price, String weight, Float distanceCoef) {
+    public static Float getTotalPrice(Float price, String weight, Float distanceCoef) {
         try {
             return price * Float.valueOf(weight) * distanceCoef;
         } catch (NumberFormatException e){

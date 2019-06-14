@@ -12,8 +12,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class RequestService {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private RequestDao requestDao = daoFactory.createRequestDao();
+    private static DaoFactory daoFactory = DaoFactory.getInstance();
+    private static RequestDao requestDao = daoFactory.createRequestDao();
 
     public void createRequest(HttpServletRequest request, User user){
 
@@ -34,6 +34,8 @@ public class RequestService {
         createdReq.setHouseNum(Integer.valueOf(house));
         createdReq.setUserId(UserService.getUserId(user.getLogin()));
         createdReq.setLuggageId(LuggageService.getLuggageId(luggage));
+        createdReq.setPrice(LuggageService.getTotalPrice(LuggageService.getLuggagePrice(luggage),
+                            weight, AddressService.getCoefficient(street)));
 
         try {
             requestDao.create(createdReq);
@@ -62,5 +64,9 @@ public class RequestService {
 
     public List<Request> getUserRequests(Integer id){
         return requestDao.read(id);
+    }
+
+    public static void removeRequest(Integer id){
+        requestDao.delete(id);
     }
 }

@@ -40,7 +40,7 @@ public class AddressService {
         return streets;
     }
 
-    public Float getCoefficient(String street){
+    public static Float getCoefficient(String street){
         Address empty = new Address();
         empty.setCoefficient(0f);
         return addresses.stream()

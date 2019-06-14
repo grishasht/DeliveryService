@@ -26,6 +26,8 @@ public class MainServlet extends HttpServlet {
         commandMap.put("/service", new ServiceForward());
         commandMap.put("/commit_req", new CommitRequest());
         commandMap.put("/my_requests", new MyRequests());
+        commandMap.put("/my_requests/pay", new PayRequest());
+        commandMap.put("/my_requests/remove", new RemoveRequest());
         commandMap.put("/service/choose_country", new ChooseCountry());
         commandMap.put("/service/choose_city", new ChooseCity());
         commandMap.put("/service/choose_street", new ChooseStreet());
