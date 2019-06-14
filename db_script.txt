@@ -1,0 +1,113 @@
+CREATE TABLE users
+(
+    id       SERIAL PRIMARY KEY,
+    login    VARCHAR(20) UNIQUE NOT NULL,
+    password VARCHAR(20)        NOT NULL,
+    name     VARCHAR(20)        NOT NULL,
+    email    VARCHAR(30)        NOT NULL,
+    role     VARCHAR(10)        NOT NULL
+);
+
+CREATE TABLE luggage
+(
+    id     SERIAL PRIMARY KEY,
+    type   VARCHAR(20) NOT NULL,
+    weight FLOAT       NOT NULL,
+    price  FLOAT       NOT NULL
+);
+
+CREATE TABLE addresses
+(
+    id      SERIAL PRIMARY KEY,
+    country VARCHAR(20) NOT NULL,
+    city    VARCHAR(20) NOT NULL,
+    street  VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE requests
+(
+    id         SERIAL PRIMARY KEY,
+    user_id    INTEGER NOT NULL,
+    luggage_id INTEGER NOT NULL,
+    address_id INTEGER NOT NULL,
+    send_date  date    NOT NULL,
+    get_date   date    NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (luggage_id) REFERENCES luggage (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES addresses (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE accounts
+(
+    id             SERIAL  PRIMARY KEY,
+    request_id INTEGER REFERENCES requests (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    amount         FLOAT   NOT NULL,
+    date           date    NOT NULL,
+    is_paid        BOOLEAN NOT NULL
+);
+
+
+ALTER TABLE requests
+    RENAME get_date TO receive_date;
+
+
+INSERT INTO luggage(type, weight, price)
+VALUES ('some type', 3.5, 5);
+INSERT INTO addresses(country, city, street)
+VALUES ('United Kingdom', 'London', 'Agar'),
+       ('United Kingdom', 'London', 'Villiers'),
+       ('United Kingdom', 'London', 'Duncannon'),
+       ('United Kingdom', 'London', 'Adelaide'),
+       ('United Kingdom', 'London', 'William IV'),
+       ('United Kingdom', 'London', 'Chandos'),
+       ('United Kingdom', 'London', 'Mays'),
+       ('United Kingdom', 'London', 'Godwin`s'),
+       ('United Kingdom', 'Birmingham', 'Sherlock'),
+       ('United Kingdom', 'Birmingham', 'Hurst'),
+       ('United Kingdom', 'Birmingham', 'Pershore'),
+       ('United Kingdom', 'Birmingham', 'Skinner'),
+       ('United Kingdom', 'Birmingham', 'Claybrook'),
+       ('United Kingdom', 'Birmingham', 'Upper Dean'),
+       ('United Kingdom', 'Birmingham', 'Spiceal'),
+       ('United Kingdom', 'Birmingham', 'Freeman')
+;
+
+INSERT INTO addresses(country, city, street)
+VALUES ('United States', 'New York', 'Linden'),
+       ('United States', 'New York', 'Gates'),
+       ('United States', 'New York', 'Woodbine'),
+       ('United States', 'New York', 'Harman'),
+       ('United States', 'New York', 'Grandview Ave'),
+       ('United States', 'New York', 'Stanhope')
+;
+
+INSERT INTO addresses(country, city, street)
+VALUES ('Ukraine', 'Kyiv', 'Metalistiv'),
+       ('Ukraine', 'Kyiv', 'Yangeliya'),
+       ('Ukraine', 'Kyiv', 'Borschahivka'),
+       ('Ukraine', 'Kyiv', 'Peremohy'),
+       ('Ukraine', 'Kyiv', 'Politehnichna'),
+       ('Ukraine', 'Kyiv', 'Khreschatyk'),
+       ('Ukraine', 'Kyiv', 'Solomiyanska'),
+       ('Ukraine', 'Kyiv', 'Obolonska'),
+       ('Ukraine', 'Chernivtsi', 'Pershotravneva'),
+       ('Ukraine', 'Chernivtsi', 'Kobyliyanska'),
+       ('Ukraine', 'Chernivtsi', 'Holovna'),
+       ('Ukraine', 'Chernivtsi', 'Rosha'),
+       ('Ukraine', 'Chernivtsi', 'Ruska'),
+       ('Ukraine', 'Chernivtsi', 'Molodizhna'),
+       ('Ukraine', 'Donetsk', 'Artema'),
+       ('Ukraine', 'Donetsk', 'Zhovtneva'),
+       ('Ukraine', 'Donetsk', 'Chervonoarmiiska'),
+       ('Ukraine', 'Donetsk', 'Kobozieva'),
+       ('Ukraine', 'Donetsk', 'Nasten`ka'),
+       ('Ukraine', 'Donetsk', 'Sadovyi prospect')
+;
+
+INSERT INTO luggage(type, price)
+VALUES ('Cloth', 3),
+       ('Letters', 0.50),
+       ('Furniture', 20),
+       ('Little transport', 10),
+       ('Huge Transport', 50),
+       ('Appliances', 5);
