@@ -106,6 +106,11 @@ public class UserService {
     public static Integer getUserId(String login) {
         List<User> users = userDao.readAll();
         return users.stream()
+                .map(user -> {
+                    if (user.getLogin().equals(login))
+                        return user.getId();
+                    else return
+                })
                 .filter(user -> user.getLogin().equals(login))
                 .findAny()
                 .get()
