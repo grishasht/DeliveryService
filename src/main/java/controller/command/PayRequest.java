@@ -3,6 +3,8 @@ package controller.command;
 import model.entity.Account;
 import model.service.AccountService;
 import model.util.Constants;
+import model.util.LogGenerator;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import java.util.Date;
 
 public class PayRequest implements Command {
     private AccountService accountService = new AccountService();
+    private Logger log = LogGenerator.getInstance();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -26,6 +29,7 @@ public class PayRequest implements Command {
             account.setDate(new java.sql.Date(date.getTime()));
             account.setAmount(Float.valueOf(totalPrice));
             accountService.createAccount(account);
+            log.info("Account created");
 
             request.getSession().setAttribute(Constants.ACCOUNT, account);
 

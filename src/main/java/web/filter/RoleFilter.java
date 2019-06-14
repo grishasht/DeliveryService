@@ -2,7 +2,9 @@ package web.filter;
 
 import model.entity.User;
 import model.util.Constants;
+import model.util.LogGenerator;
 import model.util.Role;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import java.util.Set;
 
 public class RoleFilter implements Filter {
     Map<Role, Set<String>> permissions = new HashMap<>();
+    private Logger log = LogGenerator.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -61,6 +64,8 @@ public class RoleFilter implements Filter {
         permissions.put(Role.ADMIN, adminRef);
         permissions.put(Role.USER, userRef);
         permissions.put(Role.GUEST, guestRef);
+
+        log.info("Role filter was initted");
     }
 
     @Override
@@ -75,6 +80,8 @@ public class RoleFilter implements Filter {
         if (request.getSession().getAttribute(Constants.SESSION_USER) == null) {
             request.getSession().setAttribute(Constants.SESSION_USER, new User().getGuest());
         }
+
+        log.info("User was set in session");
 
         Role sessionRole = ((User) request.getSession().getAttribute(Constants.SESSION_USER)).getRole();
 

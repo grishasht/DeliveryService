@@ -3,12 +3,15 @@ package controller.command;
 import model.entity.User;
 import model.service.RequestService;
 import model.util.Constants;
+import model.util.LogGenerator;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RequestAdd implements Command {
     private RequestService requestService = new RequestService();
+    private Logger log = LogGenerator.getInstance();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -24,6 +27,7 @@ public class RequestAdd implements Command {
         request.getSession().setAttribute(Constants.LUG_WEIGHT, weight);
 
         if (!requestService.isNumeric(house, weight)) {
+            log.info("Error while adding new request for " + user.getEmail());
             return "forward:/WEB-INF/errors/smth_wrong.jsp";
         } else if (requestService.dataExistence(country, city, street, luggage, weight)) {
             request.getSession().setAttribute(Constants.SHOW_REQ, true);

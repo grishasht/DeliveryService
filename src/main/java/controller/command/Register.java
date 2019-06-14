@@ -3,7 +3,9 @@ package controller.command;
 import model.entity.User;
 import model.service.UserService;
 import model.util.Constants;
+import model.util.LogGenerator;
 import model.util.Role;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class Register implements Command {
     private UserService userService = new UserService();
+    private Logger log = LogGenerator.getInstance();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -43,7 +46,9 @@ public class Register implements Command {
             return "forward:/WEB-INF/errors/usr_pres.jsp";
         } else {
             userService.registerUser(user);
+            log.info("User " + user.getEmail() + " registered");
             userService.authorize(user, request);
+            log.info("User " + user.getEmail() + " authorized");
         }
 
         System.out.println(user.toString());
